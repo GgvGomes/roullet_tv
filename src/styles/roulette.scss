@@ -1,0 +1,157 @@
+$number: 1;
+$positions: 1,
+2,
+3,
+4,
+5,
+6,
+7,
+8;
+
+.legenda {
+  position: absolute;
+  top: 2rem;
+  right: 8rem;
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 20px;
+
+    .square {
+      width: 18px;
+      height: 18px;
+      border: 1px solid white;
+    }
+
+    .torta {
+      background-color: #2980B9;
+    }
+
+    .chao_lava {
+      background-color: #C0392B;
+    }
+
+    .quebra_cabeca {
+      background-color: #7F8C8D;
+    }
+
+    .musica {
+      background-color: #0FA056;
+    }
+
+    .imagem_acao {
+      background-color: #8E44AD;
+    }
+  }
+}
+
+.pie_chart{
+  margin-top: -31.5rem;
+  // rotate: 22.5deg;
+}
+
+.arrow {
+  // background-color: aliceblue;
+  // border: 1px solid black;
+
+  position: absolute;
+  z-index: 100;
+  top: 1.5rem;
+  left: 48.75%;
+
+  width: 0;
+  height: 0;
+
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-top: 28px solid yellow;
+
+  box-shadow: 0 -32px 32px aliceblue;
+}
+
+.btn-spin {
+  position: absolute;
+
+  right: 8.5rem;
+  top: 14rem;
+
+  width: 160px;
+  box-shadow: 0 2px 40px aliceblue;
+  transition: scale .5s;
+
+  z-index: 2;
+
+  &:hover {
+    scale: 1.2;
+  }
+}
+
+.spin {
+  animation: rotate 18s ease-out;
+}
+
+.arrow_spin {
+  animation: move_arrow .2s infinite;
+}
+
+
+@each $positon in $positions {
+  .position-#{$positon} {
+    $number: $positon;
+
+    transform: rotate(calc((31 * 365deg) + 45deg * #{$positon}));
+
+    animation: finish_rotate_#{$positon} 3s ease-out;
+  }
+}
+
+
+@keyframes rotate {
+  0% {
+    transform: rotate(16deg);
+  }
+
+  20% {
+    transform: rotate(calc(14 * 365deg));
+  }
+  
+  40% {
+    transform: rotate(calc(24 * 365deg));
+  }
+  
+  60% {
+    transform: rotate(calc(28 * 365deg));
+  }
+  
+  80% {
+    transform: rotate(calc(30 * 365deg));
+  }
+
+  100% {
+    // transform: rotate(calc($number * 365deg));
+    transform: rotate(calc(31 * 365deg));
+  }
+}
+
+@each $positon in $positions {
+  @keyframes finish_rotate_#{$positon} {
+    0%{
+      transform: rotate(calc(31 * 365deg));
+    }
+    100% {
+      transform: rotate(calc((31 * 365deg) + $positon * 45deg));
+    }
+  }
+}
+
+@keyframes move_arrow {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(-12deg);
+  }
+}
