@@ -3,6 +3,35 @@ import { Slice } from "../slice/slice";
 
 import "../../styles/roulette.scss";
 
+const RADIAN = Math.PI / 180;
+const renderCustomizedLabel = ({
+  cx,
+  cy,
+  midAngle,
+  innerRadius,
+  outerRadius,
+  percent,
+  index,
+}: any) => {
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.4;
+  const x = cx + radius * Math.cos(-midAngle * RADIAN);
+  const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+  return (
+    <text
+      x={x}
+      y={y}
+      fill="white"
+      textAnchor={x > cx ? "start" : "end"}
+      dominantBaseline="central"
+    >
+      {/* {`${(percent * 100).toFixed(0)}%`} */}
+      {/* {`${data[index].name}`} */}
+    </text>
+  );
+};
+
+
 export const Roulette = ({ data, colors, stroke, strokeWidth }: any) => {
   const total = data.reduce((sum: any, item: any) => sum + item.value, 0);
   let startAngle = 0;

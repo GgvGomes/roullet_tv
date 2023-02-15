@@ -25,36 +25,9 @@ const data = [
   { name: "Imagem e ação", value: 200, fill: "#8E44AD", disable: true }, // Imagem e ação para o grupo.
 ];
 
-const RADIAN = Math.PI / 180;
-const renderCustomizedLabel = ({
-  cx,
-  cy,
-  midAngle,
-  innerRadius,
-  outerRadius,
-  percent,
-  index,
-}: any) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.4;
-  const x = cx + radius * Math.cos(-midAngle * RADIAN);
-  const y = cy + radius * Math.sin(-midAngle * RADIAN);
-
-  return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor={x > cx ? "start" : "end"}
-      dominantBaseline="central"
-    >
-      {/* {`${(percent * 100).toFixed(0)}%`} */}
-      {`${data[index].name}`}
-    </text>
-  );
-};
-
 const App = () => {
   const audio = new Audio('/src/assets/roulette.mp3');
+  const audioDelicia = new Audio('/src/assets/delicia.mp3')
 
   const [escrita, setEscrita] = useState("");
   const [icon, setIcon] = useState(0);
@@ -123,6 +96,8 @@ const App = () => {
 
   // Show modal
   function handleModal(number: number, modal: any) {
+    audioDelicia.currentTime = 0;
+    audioDelicia.play();
     setIcon(number);
     if (number == 1 || number == 8) {
       setEscrita("Qual é a música");
@@ -130,6 +105,7 @@ const App = () => {
       setEscrita("Imagem e ação");
     } else if (number == 3 || number == 4 || number == 5) {
       setEscrita("Torta na cara");
+
     } else if (number == 6) {
       setEscrita("O chão é lava");
     } else if (number == 7) {
