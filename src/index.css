@@ -36,7 +36,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
 
-  zoom: 2;
+  /* zoom: 2; */
 }
 
 h1 {

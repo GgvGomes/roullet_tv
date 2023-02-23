@@ -121,7 +121,7 @@ const App = () => {
   return (
     <>
       {/* Multiplicar de acordo com o tamanho da pagina */}
-      <PieChart width={600} height={600} className="pie_chart">
+      <PieChart width={500} height={500} className="pie_chart">
         <Pie
           data={data}
           dataKey="value"
